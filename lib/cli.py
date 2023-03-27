@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, ForeignKey, Column, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 Base = declarative_base()
 
@@ -27,3 +27,13 @@ session = Session()
 user = User("Billy", "Bob")
 session.add(user)
 session.commit()
+
+class ToDo(Base):
+    __tablename__ = "list"
+
+    id = Column("id", Integer, primary_key=True)
+    task_id = Column("task_id", String)
+    user_id = Column(Integer, ForeignKey(User.id))
+
+    
+
